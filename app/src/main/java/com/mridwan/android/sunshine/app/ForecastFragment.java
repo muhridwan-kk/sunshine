@@ -1,5 +1,6 @@
 package com.mridwan.android.sunshine.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +102,10 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TextView textView = (TextView) view;
-        Toast toast = Toast.makeText(this.getContext(),textView.getText(),Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(this.getContext(),textView.getText(),Toast.LENGTH_SHORT);
+//        toast.show();
+        Intent detailActivityIntent = new Intent(this.getContext(),DetailActivity.class).putExtra(Intent.EXTRA_TEXT,textView.getText());
+        startActivity(detailActivityIntent);
+
     }
 }
