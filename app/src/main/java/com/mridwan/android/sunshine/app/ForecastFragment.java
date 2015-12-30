@@ -1,7 +1,10 @@
 package com.mridwan.android.sunshine.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -79,10 +82,14 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemClic
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        String city = "Jakarta";
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             // kick off weather task
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+            Resources res=getResources();
+            String locationKey = res.getString(R.string.pref_location_key);
+            String locationDefault = res.getString(R.string.pref_location_default);
+            String city = sharedPref.getString(locationKey,locationDefault);
             FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(forecastAdapter);
             fetchWeatherTask.execute(city);
             return true;

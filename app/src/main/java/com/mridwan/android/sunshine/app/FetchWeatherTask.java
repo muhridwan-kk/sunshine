@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 class FetchWeatherTask extends AsyncTask {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
-    private final String OPENWEATHER_APPID = "2de143494c0b295cca9337e1e96b00e0";
     private final String NUM_DAYS = "7";
 
     private ArrayAdapter<String> forecastAdapter;
@@ -62,7 +61,7 @@ class FetchWeatherTask extends AsyncTask {
                       .appendQueryParameter("mode","json")
                       .appendQueryParameter("units",units)
                       .appendQueryParameter("cnt",cnt)
-                      .appendQueryParameter("appid",this.OPENWEATHER_APPID);
+                      .appendQueryParameter("appid",BuildConfig.OPEN_WEATHER_MAP_API_KEY);
 
             URL url = new URL(uriBuilder.toString());
 
